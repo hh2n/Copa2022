@@ -1,0 +1,213 @@
+{% extends 'layout.html' %}
+
+{% block title %} Inicio {% endblock %}
+
+{% block content %}
+
+      
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-1 mb-3 border-bottom">
+          <h3>Inicio</h3>
+        </div>
+        <div class="container">
+            <div class="row d-flex justify-content-between">
+                <div class="col-lg-4 p-2">
+                    <div class="sticky-top pt-3">
+                      <div class="card mb-2">
+                        <div class="card-body p-0">
+                          <h5 class="card-title pt-1 px-3">Puntuación</h5>
+                        </div>
+                      </div>
+                      <ul class="list-group list-group-light">
+                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                              <div class="d-flex align-items-center">
+                                <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 45px; height: 45px"
+                                  class="rounded-circle" />
+                                <div class="ms-3">
+                                  <p class="fw-bold mb-1">John Doe</p>
+                                  <p class="text-muted mb-0">john.doe@gmail.com</p>
+                                </div>
+                              </div>
+                              <span class="badge bg-success rounded-pill">14</span>
+                          </li>
+                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                              <div class="d-flex align-items-center">
+                                <img src="https://mdbootstrap.com/img/new/avatars/6.jpg" class="rounded-circle" alt=""
+                                  style="width: 45px; height: 45px" />
+                                <div class="ms-3">
+                                  <p class="fw-bold mb-1">Alex Ray</p>
+                                  <p class="text-muted mb-0">alex.ray@gmail.com</p>
+                                </div>
+                              </div>
+                              <span class="badge bg-success rounded-pill">14</span>
+                          </li>
+                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                              <div class="d-flex align-items-center">
+                                <img src="https://mdbootstrap.com/img/new/avatars/7.jpg" class="rounded-circle" alt=""
+                                  style="width: 45px; height: 45px" />
+                                <div class="ms-3">
+                                  <p class="fw-bold mb-1">Kate Hunington</p>
+                                  <p class="text-muted mb-0">kate.hunington@gmail.com</p>
+                                </div>
+                              </div>
+                              <span class="badge bg-success rounded-pill">14</span>
+                          </li>
+                      </ul>
+                    </div>
+                </div>
+                <div class="col-lg-8 p-0">
+                    <ul class="nav nav-pills mb-3 justify-content-center">
+                        <li class="nav-item">
+                          <a class="nav-link active" aria-current="page" href="#" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">
+                            Partidos
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">
+                            Posiciones
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
+                            Fase Final
+                          </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active p-2" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+                            {% if encuentros %}
+                              {% for encuentro in encuentros %}
+                              <div class="card border-0 mb-3">
+                                  <h6 class="card-title border-top bg-light text-muted mb-0 p-2">{{ encuentro.fase.capitalize() }} . {{ encuentro.fecha|strftime_short }}</h6>
+                                  <div class="card-body bg-light py-0">
+                                      <div class="row">
+                                        <!-- End Card de partidos -->
+                                        {% for partido in encuentro.partidos %}
+                                            <div class="col-6 m-0 p-0">
+                                              <div class="card" style="max-width: 640px;">
+                                                  <div class="row g-0">
+                                                    <div class="col-md-8">
+                                                      <div class="card-body">
+                                                        {% if partido.grupoEq1 == partido.grupoEq2 %}
+                                                          <h5 class="card-title">{{ partido.grupoEq1 }}</h5>
+                                                        {% endif %}
+                                                        <ul class="list-group rounded p-0 m-0" style="width: 100%;">
+                                                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                            <div class="d-flex align-items-center">
+                                                              {% if partido.logoEq1 != '#' %}  
+                                                              <img src="{{ url_for('static', filename='images/logo/'+partido.logoEq1) }}" alt="" style="width: 35px;" class="rounded-circle" />
+                                                              {% else %}
+                                                              <img src="{{ url_for('static', filename='images/qatarworld7572376.png') }}" alt="" style="width: 35px;" class="rounded-circle" />
+                                                              {% endif %}
+                                                              <div class="ms-3">
+                                                                <p class="fw-bold mb-1">{{ partido.nomEquipo1 }}</p>
+                                                              </div>
+                                                            </div>                                                          
+                                                            <span class="badge bg-primary rounded-pill">{{partido.goles_e1}}</span>
+                                                          </li>
+                                                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                            <div class="d-flex align-items-center">
+                                                              {% if partido.logoEq1 != '#' %}  
+                                                              <img src="{{ url_for('static', filename='images/logo/'+partido.logoEq2) }}" alt="" style="width: 35px;" class="rounded-circle" />
+                                                              {% else %}
+                                                              <img src="{{ url_for('static', filename='images/qatarworld7572376.png') }}" alt="" style="width: 35px;" class="rounded-circle" />
+                                                              {% endif %}
+                                                              <div class="ms-3">
+                                                                <p class="fw-bold mb-1">{{ partido.nomEquipo2 }}</p>
+                                                              </div>
+                                                            </div>
+                                                            <span class="badge bg-primary rounded-pill">{{partido.goles_e2}}</span>
+                                                          </li>
+                                                        </ul>
+                                                        <p class="card-text my-0 mx-2">
+                                                          <small class="text-muted p-0"> Partido {{ partido.estado.capitalize() }}</small>
+                                                        </p>
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-md-4 border-left p-3">
+                                                      <img src="{{ url_for('static', filename='images/qatarworld7572376.png') }}" class="img-fluid rounded-center" alt="...">
+                                                    </div>
+                                                  </div>
+                                              </div>
+                                            </div>  
+                                        {% endfor %}
+                                        <!-- End Card de partidos -->
+                                      </div>
+                                  </div>
+                              </div>
+                              {% endfor %}
+                            {% else %}
+                              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <i class="fa-solid fa-bell mr-2"></i>
+                                <strong>¡Santo guacamole! </strong> No hay encuentros para mostrar.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                              </div>
+                            {% endif %}
+                        </div>
+                        <div class="tab-pane fade p-2" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+                            <div class="card border-0">
+                              {% if grupos %}
+                                {% for item in grupos %}
+                                
+                                <div class="card body border-0">
+                                  <h5 class="card-title pt-2 px-3">{{ item.nomGrupo }}</h5>
+                                  <table class="table table-hover">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">Equipo</th>
+                                        <th scope="col">PJ</th>
+                                        <th scope="col">G</th>
+                                        <th scope="col">E</th>
+                                        <th scope="col">P</th>
+                                        <th scope="col">GF</th>
+                                        <th scope="col">GC</th>
+                                        <th scope="col">DG</th>
+                                        <th scope="col">Pts</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody class="table-group-divider">    
+                                        {% for equipo in item.equipos %}
+                                          <tr class="bg-light" style="cursor: pointer;">
+                                            <th scope="row">
+                                              {% if equipo.logo != '#' %}
+                                                <img src="{{ url_for('static', filename='images/logo/'+equipo.logo) }}" class="img-fluid rounded-3 mr-2" alt="..." width="25px">
+                                              {% else %}
+                                                <img src="{{ url_for('static', filename='images/logo/Crest-24x24.svg') }}" class="img-fluid rounded-3 mr-2" alt="..." width="25px">
+                                              {% endif %}
+                                              <span class="ml-2">&nbsp; {{ equipo.nombreEquipo }}</span>
+                                            </th>
+                                            <td>0</td>
+                                            <td>0</td>
+                                            <td>0</td>
+                                            <td>0</td>
+                                            <td>0</td>
+                                            <td>0</td>
+                                            <td>0</td>
+                                            <td>0</td>
+                                          </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                  </table>
+                                </div>
+                                {% endfor %}
+                              {% else %}
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                  <i class="fa-solid fa-bell mr-2"></i>
+                                  <strong>¡Santo guacamole! </strong> no se encontaron registros para mostrar.
+                                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                              {% endif %} 
+                            </div>
+                          
+                        </div>
+                        <div class="tab-pane fade p-2" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
+                            <img src="{{ url_for('static', filename='images/w1129810.jpg') }}" class="img-fluid" alt="...">
+                        </div>
+                    </div>
+                      
+                </div>
+            
+            </div>
+        </div>
+        
+    
+{% endblock %}
