@@ -15,7 +15,9 @@
     <link href="{{ url_for('static', filename='fontawesome/css/fontawesome.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='fontawesome/css/brands.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='fontawesome/css/solid.css') }}" rel="stylesheet">
-    
+    <!-- SweetAlert2 -->
+    <link href="{{ url_for('static', filename='plugins/sweet-alert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+           
   </head>
   <body>
     <header class="p-3 border-bottom bg-light">
@@ -42,7 +44,8 @@
             </form> -->
             <div class="dropdown text-end">
                 <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle img-fluid shadow-4 bg-white">
+                    <!-- <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle img-fluid shadow-4 bg-white"> -->
+                    <img src="https://mdbootstrap.com/img/new/avatars/{{g.user.idUser}}.jpg" alt="mdo" width="32" height="32" class="rounded-circle img-fluid shadow-4 bg-danger">
                 </a>
                 <ul class="dropdown-menu text-small">
                     <li><a class="dropdown-item" href="#">Nuevo Registro...</a></li>
@@ -63,7 +66,52 @@
         </main>
     </div>
 
+   <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" action="{{ url_for('home.savePronostico') }}">
+                <input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token() }}"/>
+                <input type="hidden" name="idpartido" id="idpartido">
+                <input type="hidden" name="idEquipo1" id="idEquipo1">
+                <input type="hidden" name="idEquipo2" id="idEquipo2">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Mi Pronóstico</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3 row shadow p-2 mb-2 bg-body rounded">
+                        <label for="txt_resulEq1" class="col-sm-10 col-form-label" id="lbl_eq1">Equipo 1</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="txt_resulEq1" name="txt_resulEq1" placeholder="0" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row shadow p-2 mb-2 bg-body rounded">
+                        <label for="txt_resulEq2" class="col-sm-10 col-form-label text-right" id="lbl_eq2">Equipo 2</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="txt_resulEq2" name="txt_resulEq2" placeholder="0" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-square-xmark"></i>
+                        <span class="mx-2">Cerrar</span>
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-regular fa-floppy-disk"></i>
+                        <span class="mx-2">Guardar</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+    <!-- jQuery  -->
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/pronostico.js') }}"></script>
+    <!-- SweetAlert2 -->
+    <script src="{{ url_for('static', filename='/plugins/sweet-alert2/sweetalert2.min.js') }}"></script>
   </body>
 </html>

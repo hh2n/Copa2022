@@ -28,11 +28,11 @@
                                   <p class="text-muted mb-0">{{ usuario.email }}</p>
                                 </div>
                               </div>
-                              <span class="badge bg-success rounded-pill">14</span>
+                              <span class="badge bg-success rounded-pill">0</span>
                           </li>
                           {% endfor %}
                         {% endif %}
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                       <!--  <li class="list-group-item d-flex justify-content-between align-items-center">
                             <div class="d-flex align-items-center">
                               <img src="https://mdbootstrap.com/img/new/avatars/6.jpg" class="rounded-circle" alt=""
                                 style="width: 45px; height: 45px" />
@@ -53,7 +53,7 @@
                               </div>
                             </div>
                             <span class="badge bg-success rounded-pill">14</span>
-                        </li>
+                        </li> -->
                       </ul>
                     </div>
                 </div>
@@ -77,6 +77,38 @@
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active p-2" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+                            <!-- <form class="row g-3" method="post">
+                              <div class="col-auto">
+                                <select class="form-select form-control" aria-label="Default select example">
+                                  {% if encuentros %}
+                                    {% for item in encuentros %}
+                                      <option value="{{ item.fecha }}">{{ item.fecha|strftime }}</option>
+                                    {% endfor %}
+                                  {% endif %}
+                                </select>
+                              </div>
+                              <div class="col-auto">
+                                <button type="submit" class="btn btn-primary mb-3"> 
+                                  <i class="fa-sharp fa-solid fa-magnifying-glass-arrow-right fa-lg"></i>
+                                  <span class="mx-2">Buscar ...</span>
+                                </button>
+                              </div>
+                            </form>
+                            <hr> -->
+                            {% for category, message in get_flashed_messages(with_categories=true) %}
+                              <hr>
+                              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                                <strong> 
+                                  <i class="fa-solid fa-bug"></i>
+                                  {% if category == 'danger' %}
+                                    <span class="ml-2"> Ups!</span></strong> 
+                                  {% else %}  
+                                    <span class="ml-2">Chido!</span></strong> 
+                                  {% endif %}
+                                  <br> {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                              </div>
+                            {% endfor %}
                             {% if encuentros %}
                               {% for encuentro in encuentros %}
                               <div class="card border-0 mb-3">
@@ -88,7 +120,7 @@
                                             <div class="col-6 m-0 p-0">
                                               <div class="card" style="max-width: 640px;">
                                                   <div class="row g-0">
-                                                    <div class="col-md-8">
+                                                    <div class="col-md-9">
                                                       <div class="card-body">
                                                         {% if partido.grupoEq1 == partido.grupoEq2 %}
                                                           <h5 class="card-title">{{ partido.grupoEq1 }}</h5>
@@ -126,8 +158,26 @@
                                                         </p>
                                                       </div>
                                                     </div>
-                                                    <div class="col-md-4 border-left p-3">
-                                                      <img src="{{ url_for('static', filename='images/qatarworld7572376.png') }}" class="img-fluid rounded-center" alt="...">
+                                                    <div class="col-md-3 border-left p-3">
+                                                      <div class="card-body p-2 m-2 flex-column mb-3">
+                                                        {% if partido.estado == 'PENDIENTE' %}
+                                                        <div class="d-grid gap-2 col-12 mx-auto">
+                                                          <button 
+                                                            type="button" 
+                                                            class="btn btn-primary btn-sm mt-4" 
+                                                            class="btn btn-primary" 
+                                                            data-bs-toggle="modal" 
+                                                            data-bs-target="#staticBackdrop"
+                                                            onclick="cargarPartido('{{ partido.idPartido }}','{{csrf_token()}}')"
+                                                          >
+                                                            <i class="fa-solid fa-pen-to-square mx-2"></i>
+                                                          </button>
+                                                        </div>
+                                                        {% endif %}
+                                                        <div class="d-grid gap-2 col-12 mt-4 mx-2">
+                                                          <img src="{{ url_for('static', filename='images/qatarworld7572376.png') }}" class="img-fluid" alt="..." width="50">
+                                                        </div>
+                                                      </div>
                                                     </div>
                                                   </div>
                                               </div>
@@ -150,7 +200,6 @@
                             <div class="card border-0">
                               {% if grupos %}
                                 {% for item in grupos %}
-                                
                                 <div class="card body border-0">
                                   <h5 class="card-title pt-2 px-3">{{ item.nomGrupo }}</h5>
                                   <table class="table table-hover">

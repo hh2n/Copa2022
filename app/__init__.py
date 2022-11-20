@@ -19,6 +19,7 @@ def create_app():
     ## Import conexion a base de datos 
     from .db import db
     db.init_app(app)
+    app.permanent_session_lifetime = datetime.timedelta(minutes=60)
 
     ## import BluePrint
     from .routes import home
@@ -28,6 +29,11 @@ def create_app():
     app.register_blueprint(home.bp)
     app.register_blueprint(auth.bp)
 
+    @app.template_filter('strftime')
+    def date_format(value):
+        months = ('Ene','Feb',"Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic")
+        month = months[value.month-1]
+        return "{} - {} - {}".format(value.day, month, value.year)
 
     @app.template_filter('strftime_short')
     def date_format_short(value):

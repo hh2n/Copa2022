@@ -43,7 +43,7 @@ class Usuario(Config):
         c.execute(
             'SELECT tu.idUser, tu.email, tu.telefono, tu.foto	,'
             'CONCAT_WS(" ", tu.pnombre, tu.apaterno) as nombreUser '
-            'FROM '+self.tblUsers+' tu WHERE tu.estado = 1'
+            'FROM '+self.tblUsers+' tu WHERE tu.estado = 1 ORDER BY nombreUser ASC '
         )
         return c.fetchall()
 
