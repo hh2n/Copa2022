@@ -4,7 +4,6 @@
 
 {% block content %}
 
-      
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-1 mb-3 border-bottom">
           <h3>Inicio</h3>
         </div>
@@ -18,39 +17,43 @@
                         </div>
                       </div>
                       <ul class="list-group list-group-light">
+                        {% if usuarios %}
+                          {% for usuario in usuarios %}
                           <li class="list-group-item d-flex justify-content-between align-items-center">
                               <div class="d-flex align-items-center">
-                                <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 45px; height: 45px"
+                                <img src="https://mdbootstrap.com/img/new/avatars/{{usuario.idUser}}.jpg" alt="" style="width: 45px; height: 45px"
                                   class="rounded-circle" />
                                 <div class="ms-3">
-                                  <p class="fw-bold mb-1">John Doe</p>
-                                  <p class="text-muted mb-0">john.doe@gmail.com</p>
+                                  <p class="fw-bold mb-1">{{ usuario.nombreUser.title() }}</p>
+                                  <p class="text-muted mb-0">{{ usuario.email }}</p>
                                 </div>
                               </div>
                               <span class="badge bg-success rounded-pill">14</span>
                           </li>
-                          <li class="list-group-item d-flex justify-content-between align-items-center">
-                              <div class="d-flex align-items-center">
-                                <img src="https://mdbootstrap.com/img/new/avatars/6.jpg" class="rounded-circle" alt=""
-                                  style="width: 45px; height: 45px" />
-                                <div class="ms-3">
-                                  <p class="fw-bold mb-1">Alex Ray</p>
-                                  <p class="text-muted mb-0">alex.ray@gmail.com</p>
-                                </div>
+                          {% endfor %}
+                        {% endif %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                              <img src="https://mdbootstrap.com/img/new/avatars/6.jpg" class="rounded-circle" alt=""
+                                style="width: 45px; height: 45px" />
+                              <div class="ms-3">
+                                <p class="fw-bold mb-1">Alex Ray</p>
+                                <p class="text-muted mb-0">alex.ray@gmail.com</p>
                               </div>
-                              <span class="badge bg-success rounded-pill">14</span>
-                          </li>
-                          <li class="list-group-item d-flex justify-content-between align-items-center">
-                              <div class="d-flex align-items-center">
-                                <img src="https://mdbootstrap.com/img/new/avatars/7.jpg" class="rounded-circle" alt=""
-                                  style="width: 45px; height: 45px" />
-                                <div class="ms-3">
-                                  <p class="fw-bold mb-1">Kate Hunington</p>
-                                  <p class="text-muted mb-0">kate.hunington@gmail.com</p>
-                                </div>
+                            </div>
+                            <span class="badge bg-success rounded-pill">14</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                              <img src="https://mdbootstrap.com/img/new/avatars/7.jpg" class="rounded-circle" alt=""
+                                style="width: 45px; height: 45px" />
+                              <div class="ms-3">
+                                <p class="fw-bold mb-1">Kate Hunington</p>
+                                <p class="text-muted mb-0">kate.hunington@gmail.com</p>
                               </div>
-                              <span class="badge bg-success rounded-pill">14</span>
-                          </li>
+                            </div>
+                            <span class="badge bg-success rounded-pill">14</span>
+                        </li>
                       </ul>
                     </div>
                 </div>
@@ -208,6 +211,5 @@
             
             </div>
         </div>
-        
-    
+            
 {% endblock %}

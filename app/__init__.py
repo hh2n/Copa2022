@@ -1,9 +1,14 @@
 import os
 import datetime
 from flask import Flask 
+from flask_wtf.csrf import CSRFProtect
+from flask_wtf.csrf import CSRFError
+
+csrf = CSRFProtect()
 
 def create_app():
     app = Flask(__name__)
+    csrf.init_app(app)
     app.config.from_mapping(
         SECRET_KEY = os.environ.get('SECRET_KEY_APP'),
         DATABASE_HOST = os.environ.get('FLASK_DATABASE_HOST'),
@@ -17,9 +22,11 @@ def create_app():
 
     ## import BluePrint
     from .routes import home
+    from .routes import auth
 
     ## Inscribiendo BluePrint
     app.register_blueprint(home.bp)
+    app.register_blueprint(auth.bp)
 
 
     @app.template_filter('strftime_short')

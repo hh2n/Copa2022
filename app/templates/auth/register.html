@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> CUP22 | {% block title %}{% endblock %} </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A premium admin dashboard template by mannatthemes" name="description" />
+    <meta content="Mannatthemes" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo/favicon.ico') }}">
+
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- our project just needs Font Awesome Solid + Brands -->
+    <link href="{{ url_for('static', filename='fontawesome/css/fontawesome.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='fontawesome/css/brands.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='fontawesome/css/solid.css') }}" rel="stylesheet">
+    
+  </head>
+  <style>
+    .cascading-right {
+        margin-right: -50px;
+    }
+
+    @media (max-width: 991.98px) {
+        .cascading-right {
+        margin-right: 0;
+        }
+    }
+    </style>
+  <body>
+    <!-- Section: Design Block -->
+    <section class="vh-100 text-center text-lg-start">
+        <!-- Jumbotron -->
+        <div class="container py-5">
+            <div class="row g-0 align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="card cascading-right" style="background: hsla(0, 0%, 100%, 0.55); backdrop-filter: blur(30px);">
+                        <div class="card-body p-5  text-center">
+                            <h2 class="fw-bold mb-5">Regístrate ahora</h2>
+                            <form method="post" novalidate>
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                                <!-- 2 column grid layout with text inputs for the first and last names -->
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" id="txt_name" name="txt_name" class="form-control" placeholder="Introduce tu nombre" />
+                                            <label class="form-label" for="txt_name">Nombre</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" id="txt_apellido" name="txt_apellido" class="form-control" placeholder="Introduce tu apellido" />
+                                            <label class="form-label" for="txt_apellido">Apellidos</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Email input -->
+                                <div class="form-outline mb-4">
+                                    <input type="email" id="txt_mail" name="txt_mail" class="form-control" placeholder="Introduce un correo electrónico valido" />
+                                    <label class="form-label" for="txt_mail">Correo Electrónico</label>
+                                </div>
+                
+                                <!-- Password input -->
+                                <div class="form-outline mb-4">
+                                    <input type="password" id="txt_password" name="txt_password" class="form-control" placeholder="************" />
+                                    <label class="form-label" for="txt_password">Contraseña</label>
+                                </div>
+            
+                                <!-- Submit button -->
+                                <button type="submit" class="btn btn-primary btn-block mb-4">
+                                    
+                                    <i class="fa-regular fa-arrow-right-to-bracket fa-lg mr-2"></i> &nbsp;
+                                    Inscribirse
+                                </button>
+                
+                                <!-- Register buttons -->
+                                <div class="text-center">
+                                    <p class="small fw-bold mt-2 pt-1 mb-0"> ¿Tienes una cuenta? <a href="{{ url_for('auth.login') }}" class="link-danger">Inicia Sesión</a></p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <img src="{{ url_for('static', filename='images/w1129810.jpg') }}" class="w-100 rounded-4" alt="" />
+                </div>
+            </div>
+        </div>
+        <!-- Jumbotron -->
+    </section>
+    <!-- Section: Design Block -->
+
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+  </body>
+</html>

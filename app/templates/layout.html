@@ -45,11 +45,11 @@
                     <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle img-fluid shadow-4 bg-white">
                 </a>
                 <ul class="dropdown-menu text-small">
-                    <li><a class="dropdown-item" href="#">New project...</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Nuevo Registro...</a></li>
+                    <li><a class="dropdown-item" href="#">Ajustes</a></li>
+                    <li><a class="dropdown-item" href="#">Perfil</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</a></li>
                 </ul>
             </div>
             {% endif %}
