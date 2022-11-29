@@ -113,7 +113,7 @@ StyleCopReport.xml
 *.pidb
 *.svclog
 *.scc
-*.jpg
+
 *.pdf
 #*.png 
 *.gif 
